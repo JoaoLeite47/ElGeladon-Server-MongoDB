@@ -15,8 +15,8 @@
 
   {
     "sabor": "Chocolate Belga",
-    "descricao": " Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
-    " foto": "./assets/images/chocolate-belga.png",
-    " preco": 7.0
+    "descricao": "Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
+    "foto": "./assets/images/chocolate-belga.png",
+    "preco": 7.0
   }
 ]
