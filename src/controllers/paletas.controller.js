@@ -29,14 +29,14 @@ export const findByIdPaletaController = async (req, res) => {
     return res.status(400).send({ message: 'id inválido!' }); // retorna um erro 400
   }
 
-  const paleta_escolhida = await findByIdPaletaService(id_Paleta); // busca a paleta com o id
+  const chosedPaleta = await findByIdPaletaService(id_Paleta); // busca a paleta com o id
 
-  if (!paleta_escolhida) {
+  if (!chosedPaleta) {
     // se não encontrar a paleta
     return res.status(404).send({ message: 'Paleta não encontrada!' }); // retorna um erro 404
   }
 
-  res.send(paleta_escolhida); // retorna a paleta
+  res.send(chosedPaleta); // retorna a paleta
 };
 
 export const createPaletaController = async (req, res) => {
@@ -59,9 +59,9 @@ export const createPaletaController = async (req, res) => {
 
 export const updatePaletaController = async (req, res) => {
   // rota para atualizar uma paleta (PUT)
-  const id = req.params.id; // pega o id da paleta
+  const id_Paleta = req.params.id; // pega o id da paleta
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id_Paleta)) {
     // se o id não for um número
     return res.status(400).send({ message: 'id inválido!' }); // retorna um erro 400
   }
@@ -78,14 +78,18 @@ export const updatePaletaController = async (req, res) => {
     // se não tiver todos os dados
     return res.status(404).send({ message: 'Envie todos os dados da paleta!' }); // retorna erro 400
   }
-  const updatedPaleta = await updatePaletaService(id, paletaEdit); // chama o serviço para atualizar uma paleta
+  const updatedPaleta = await updatePaletaService(id_Paleta, paletaEdit); // chama o serviço para atualizar uma paleta
   res.send(updatedPaleta);
 };
 
-export const deletePaletaController = (req, res) => {
+export const deletePaletaController = async (req, res) => {
   // rota para deletar uma paleta (DELETE)
   const id_Paleta = req.params.id;
   // pega o id da paleta
-  deletePaletaService(id_Paleta); // chama o serviço para deletar uma paleta
+  if (!mongoose.Types.ObjectId.isValid(id_Paleta)) {
+    // se o id não for um número
+    return res.status(400).send({ message: 'id inválido!' }); // retorna um erro 400
+  }
+  await deletePaletaService(id_Paleta); // chama o serviço para deletar uma paleta
   res.send({ message: 'Paleta deletada com sucesso' }); // retorna uma mensagem de sucesso
 };

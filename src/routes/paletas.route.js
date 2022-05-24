@@ -10,7 +10,7 @@ import {
 
 export const route = express.Router(); // instancia o router do express
 
-route.get('/todas-paletas', findAllPaletasController); // rota para listar todas as paletas (GET ALL)
+route.get('/all-paletas', findAllPaletasController); // rota para listar todas as paletas (GET ALL)
 
 route.get('/paleta/:id', findByIdPaletaController); // rota para listar uma paleta (GET BY ID)
 
