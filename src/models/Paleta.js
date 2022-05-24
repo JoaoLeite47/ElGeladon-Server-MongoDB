@@ -17,6 +17,6 @@ const PaletaSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-});
+}); // cria o esquema do banco de dados
 
 export const Paleta = mongoose.model('paletas', PaletaSchema);

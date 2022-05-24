@@ -39,7 +39,7 @@ export const findByIdPaletaController = async (req, res) => {
   res.send(paleta_escolhida); // retorna a paleta
 };
 
-export const createPaletaController = (req, res) => {
+export const createPaletaController = async (req, res) => {
   // rota para criar uma paleta (POST)
   const paleta = req.body; // pega o corpo da requisição
 
@@ -53,17 +53,19 @@ export const createPaletaController = (req, res) => {
     // se não tiver todos os dados
     return res.status(400).send({ message: 'Envie todos os dados da paleta!' }); // retorna erro 400
   }
-  const newPaleta = createPaletaService(paleta); // chama o serviço para criar uma paleta
+  const newPaleta = await createPaletaService(paleta); // chama o serviço para criar uma paleta
   res.status(201).send(newPaleta); // retorna a nova paleta
 };
 
-export const updatePaletaController = (req, res) => {
+export const updatePaletaController = async (req, res) => {
   // rota para atualizar uma paleta (PUT)
-  const id = Number(req.params.id); // pega o id da paleta
+  const id = req.params.id; // pega o id da paleta
 
-  if (!id) {
-    return res.status(400).send({ message: 'id inválido!' }); // retorna erro 400
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    // se o id não for um número
+    return res.status(400).send({ message: 'id inválido!' }); // retorna um erro 400
   }
+
   const paletaEdit = req.body; // pega o corpo da requisição
 
   if (
@@ -76,7 +78,7 @@ export const updatePaletaController = (req, res) => {
     // se não tiver todos os dados
     return res.status(404).send({ message: 'Envie todos os dados da paleta!' }); // retorna erro 400
   }
-  const updatedPaleta = updatePaletaService(id, paletaEdit); // chama o serviço para atualizar uma paleta
+  const updatedPaleta = await updatePaletaService(id, paletaEdit); // chama o serviço para atualizar uma paleta
   res.send(updatedPaleta);
 };
 
