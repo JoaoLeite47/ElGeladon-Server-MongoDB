@@ -24,7 +24,7 @@ export const updatePaletaService = async (id_Paleta, paletaEdit) => {
   return paletaUpdated; // retorna o objeto editado
 };
 
-export const deletePaletaService = async(id_Paleta) => {
+export const deletePaletaService = async (id_Paleta) => {
   // serviço para deletar uma paleta
-return await Paleta.findByIdAndDelete(id_Paleta); // deleta a paleta
+  return await Paleta.findByIdAndDelete(id_Paleta); // deleta a paleta
 };
