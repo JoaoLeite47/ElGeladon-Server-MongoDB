@@ -24,3 +24,16 @@ export const validObjectBody = (req, res, next) => {
   }
   next();
 }; // verifica se o corpo da requisição é válido
+
+export const ValidObjectBodyCarrinho = (req, res, next) => {
+  // verifica se o corpo da requisição é válido
+  const carrinho = req.body; // pega o corpo da requisição
+  carrinho.forEach((item) => {
+    if (!item || !item.paletaId || !item.quatidade) {
+      return res
+        .status(404)
+        .send({ message: 'Envie todos os dados do carrinho!' }); // retorna erro 400
+    }
+  });
+  next();
+};
