@@ -1,5 +1,11 @@
 import express from 'express'; // importa o express
 
+import swaggerUi from 'swagger-ui-express';
+
+import { readFile } from 'fs/promises'; // importa o fs
+
+const swaagDocument = JSON.parse(await readFile('./swagger.json', 'utf8')); // le o arquivo swagger.json
+
 import {
   findAllPaletasController,
   findByIdPaletaController,
@@ -41,3 +47,7 @@ route.post(
 ); // rota para criar um carrinho (POST)
 
 route.delete('/finish-carrinho', deleteAllCarrinhoController); // rota para deletar todos os itens do carrinho (DELETE)
+
+route.use('/api-docs', swaggerUi.serve); // rota para acessar o swagger
+
+route.get('/api-docs', swaggerUi.setup(swaagDocument)); // rota para acessar o swagger
