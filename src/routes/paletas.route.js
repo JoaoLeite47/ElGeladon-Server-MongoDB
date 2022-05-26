@@ -2,7 +2,7 @@ import express from 'express'; // importa o express
 
 import swaggerUi from 'swagger-ui-express';
 
-import { readFile } from 'fs/promises'; // importa o fs
+import { readFile } from 'fs/promises'; // lib para leitura do arquivo json
 
 const swaagDocument = JSON.parse(await readFile('./swagger.json', 'utf8')); // le o arquivo swagger.json
 
